@@ -1,6 +1,7 @@
 const buttonColours = ["green", "red", "yellow", "blue"];
 let gamePattern = []; // The games pattern
 let userClickedPattern = []; // Patter in which the user clicked the colours
+let level = 0; // Level in which play is on
 
 // Check which colour is clicked
 $(".btn").click(function () {
@@ -30,6 +31,8 @@ function nextSequence() {
 		.fadeIn();
 
 	playSound(randomChosenColour);
+
+	level++;
 }
 
 // Playing sound
@@ -37,3 +40,9 @@ function playSound(colour) {
 	let audio = new Audio("sounds/" + colour + ".mp3");
 	return audio.play();
 }
+
+// Starting the game
+$(document).keypress(function () {
+	nextSequence();
+	$("h1").text(`Level ${level}`);
+});
