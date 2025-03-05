@@ -16,6 +16,9 @@ $(".btn").click(function () {
 	setTimeout(function () {
 		$("#" + userChosenColour).removeClass("pressed");
 	}, 100);
+
+	// Checking the user pattern
+	checkAnswer(userClickedPattern.length - 1);
 });
 
 // Sequence of the game
@@ -25,6 +28,7 @@ function nextSequence() {
 	let randomChosenColour = buttonColours[randomNumber];
 
 	gamePattern.push(randomChosenColour);
+	console.log(gamePattern);
 
 	$("#" + randomChosenColour)
 		.fadeOut()
@@ -46,3 +50,18 @@ $(document).keypress(function () {
 	nextSequence();
 	$("h1").text(`Level ${level}`);
 });
+
+// Checking the user pattern
+function checkAnswer(currentLevel) {
+	if (gamePattern.length === userClickedPattern.length) {
+		if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
+			console.log("success");
+			setTimeout(function () {
+				nextSequence();
+			}, 1000);
+			userClickedPattern = [];
+		}
+	} else {
+		console.log("fails");
+	}
+}
