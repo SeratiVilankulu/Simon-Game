@@ -17,7 +17,6 @@ $(document).keypress(function () {
 $(".btn").click(function () {
 	let userChosenColour = this.id; // The colour the user has clicked on
 	userClickedPattern.push(userChosenColour);
-	console.log(userClickedPattern);
 
 	$("#" + userChosenColour).addClass("pressed");
 	playSound(userChosenColour);
@@ -35,14 +34,12 @@ $(".btn").click(function () {
 function checkAnswer(currentLevel) {
 	if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
 		if (gamePattern.length === userClickedPattern.length) {
-			console.log("success");
 			setTimeout(function () {
 				nextSequence();
 			}, 1000);
 			userClickedPattern = [];
 		}
 	} else {
-		console.log("fails");
 		$("h1").text("Game Over, press any key to start again");
 		$("body").addClass("game-over");
 		playSound("wrong");
@@ -63,7 +60,6 @@ function nextSequence() {
 	let randomChosenColour = buttonColours[randomNumber];
 
 	gamePattern.push(randomChosenColour);
-	console.log(gamePattern);
 
 	$("#" + randomChosenColour)
 		.fadeOut()
